@@ -17,14 +17,50 @@ with DAG(
     #tags=["example", "example2"],
     #params={"example_key": "example_value"},
 ) as dag:
-    bash_t1 = BashOperator(
-        task_id = "bash_t1",
-        bash_command='echo whoami',
-    )
-    
-    bash_t2 = BashOperator(
-        task_id = "bash_t2",
-        bash_command='echo $HOSTNAME',
+    t1 = EmptyOperator(
+        task_id = "t1"
     )
 
-    bash_t1 >> bash_t2
+    t2 = EmptyOperator(
+        task_id = "t2"
+    )
+
+    t3 = EmptyOperator(
+        task_id = "t3"
+    )
+
+    t4 = EmptyOperator(
+        task_id = "t4"
+    )
+
+    t5 = EmptyOperator(
+        task_id = "t5"
+    )
+
+    t6 = EmptyOperator(
+        task_id = "t6"
+    )
+
+    t7 = EmptyOperator(
+        task_id = "t7"
+    )
+
+    t8 = EmptyOperator(
+        task_id = "t8"
+    )
+
+    t1 >> [t2, t3] >> t4
+    t5 >> t4
+    [t4, t7] >> t6 >> t8
+
+    # bash_t1 = BashOperator(
+    #     task_id = "bash_t1",
+    #     bash_command='echo whoami',
+    # )
+    
+    # bash_t2 = BashOperator(
+    #     task_id = "bash_t2",
+    #     bash_command='echo $HOSTNAME',
+    # )
+
+    # bash_t1 >> bash_t2
